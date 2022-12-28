@@ -7,7 +7,7 @@ from tensorflow import keras
 
 
 
-""" reading images as gray function """
+""" reading images function """
 def read_images(gray_scale=False):
     print('Reading images...')
     images = []
@@ -53,15 +53,35 @@ def read_images(gray_scale=False):
 
 
 
+""" calculating fscore """
+def calc_fscore(recall, precision):
+    return 2 * ((recall * precision) / (recall + precision))
+
+
+
+""" splitting data """
+def split_data(features, output, train_size): 
+    return train_test_split(features, output, train_size=train_size)
+
+
+
+""" writing model report """
+def write_model_report(file_name, measurements={}):
+    with open(f"{file_name}.txt", "w") as file: 
+        for m in measurements:    
+            file.write(f"{m} = {measurements[m]}\n")
+
+
+
 """ Running model """
-def run_nn_model(model_id, model: keras.models.Sequential, images, labels, train_size=0.8, epochs=5):
+def run_nn_model(model_id, model: keras.models.Sequential, images, labels, train_size=0.8, epochs=30):
     print(f'Model {model_id} running...\n')
     
     # Showing model summary
     model.summary()
     
     # Spliting data into training & testing
-    training_images, testing_images, training_labels, testing_labels = train_test_split(images, labels, train_size=train_size)
+    training_images, testing_images, training_labels, testing_labels = split_data(images, labels, train_size)
 
     # Configuring model
     model.compile(
@@ -79,15 +99,17 @@ def run_nn_model(model_id, model: keras.models.Sequential, images, labels, train
         validation_data=(testing_images, testing_labels)
     )
     
+    # Evaluating model
     loss, accuracy, recall, precision = model.evaluate(testing_images, testing_labels, verbose=2)
     
-    fscore = 2 * ((recall * precision) / (recall + precision))
-    
+    # Saving model
     model.save(f"{model_id}.h5")
     
-    with open(f"{model_id}.txt", "w") as file:
-        file.write(f"Loss = {loss}\n")
-        file.write(f"Accuracy = {accuracy}\n")
-        file.write(f"Recall = {recall}\n")
-        file.write(f"Precision = {precision}\n")
-        file.write(f"Fscore = {fscore}\n")
+    # Reporting model 
+    write_model_report(model_id, {
+        "loss": loss,
+        "accuracy": accuracy,
+        "recall": recall,
+        "precision": precision,
+        "fscore": calc_fscore(recall, precision)
+    })
