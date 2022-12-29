@@ -67,7 +67,7 @@ def split_data(features, output, train_size):
 
 """ writing model report """
 def write_model_report(file_name, measurements={}):
-    with open(f"{file_name}.txt", "w") as file: 
+    with open(f"{file_name}.txt", "a") as file: 
         for m in measurements:    
             file.write(f"{m} = {measurements[m]}\n")
 
@@ -75,10 +75,10 @@ def write_model_report(file_name, measurements={}):
 
 """ Running model """
 def run_nn_model(model_id, model: keras.models.Sequential, images, labels, train_size=0.8, epochs=30):
-    print(f'Model {model_id} running...\n')
-    
     # Showing model summary
-    model.summary()
+    with open(f"{model_id}.txt", "w") as file:
+        model.summary(print_fn=lambda x: file.write(x + '\n'))
+        file.write('\n')
     
     # Spliting data into training & testing
     training_images, testing_images, training_labels, testing_labels = split_data(images, labels, train_size)
