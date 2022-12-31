@@ -1,24 +1,24 @@
-Model: "sequential_26"
+Model: "sequential_31"
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
 =================================================================
- conv2d_12 (Conv2D)          (None, 98, 98, 32)        896       
+ conv2d_2 (Conv2D)           (None, 98, 98, 32)        896       
                                                                  
- max_pooling2d_12 (MaxPoolin  (None, 49, 49, 32)       0         
- g2D)                                                            
+ max_pooling2d_2 (MaxPooling  (None, 49, 49, 32)       0         
+ 2D)                                                             
                                                                  
- conv2d_13 (Conv2D)          (None, 47, 47, 64)        18496     
+ conv2d_3 (Conv2D)           (None, 47, 47, 64)        18496     
                                                                  
- max_pooling2d_13 (MaxPoolin  (None, 23, 23, 64)       0         
- g2D)                                                            
+ max_pooling2d_3 (MaxPooling  (None, 23, 23, 64)       0         
+ 2D)                                                             
                                                                  
- flatten_26 (Flatten)        (None, 33856)             0         
+ flatten_31 (Flatten)        (None, 33856)             0         
                                                                  
- dense_67 (Dense)            (None, 1024)              34669568  
+ dense_92 (Dense)            (None, 1024)              34669568  
                                                                  
- dense_68 (Dense)            (None, 512)               524800    
+ dense_93 (Dense)            (None, 512)               524800    
                                                                  
- dense_69 (Dense)            (None, 10)                5130      
+ dense_94 (Dense)            (None, 10)                5130      
                                                                  
 =================================================================
 Total params: 35,218,890
@@ -26,8 +26,34 @@ Trainable params: 35,218,890
 Non-trainable params: 0
 _________________________________________________________________
 
-loss = 0.5777658224105835
-accuracy = 0.9322034120559692
-recall = 0.9297820925712585
-precision = 0.9343065619468689
-fscore = 0.9320388364195907
+
+k#1
+accuracy = 0.9055690072639225
+recall = 0.9055690072639225
+precision = 0.9055690072639225
+fscore = 0.9055690072639225
+
+k#2
+accuracy = 0.9200968523002422
+recall = 0.9200968523002422
+precision = 0.9200968523002422
+fscore = 0.9200968523002422
+
+k#3
+accuracy = 0.9176755447941889
+recall = 0.9176755447941889
+precision = 0.9176755447941889
+fscore = 0.9176755447941889
+
+k#4
+accuracy = 0.9249394673123487
+recall = 0.9249394673123487
+precision = 0.9249394673123487
+fscore = 0.9249394673123487
+
+k#5
+accuracy = 0.9249394673123487
+recall = 0.9249394673123487
+precision = 0.9249394673123487
+fscore = 0.9249394673123487
+
